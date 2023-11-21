@@ -1,0 +1,96 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	display: flex;
+	background-color: #cecece;
+}
+
+.container {
+	width: 50%;
+	position: absolute;
+	background-color: #fff;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(0, 0, 0, 0.2),
+		4px -4px 8px rgba(0, 0, 0, 0.2), -4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-wrapper {
+	padding: 32px;
+}
+
+.user-wrapper .title {
+	text-align: center;
+	font-size: 40px;
+	margin-bottom: 12px;
+	font-weight: bold;
+}
+.user-wrapper .desc {
+	text-align: center;
+	margin-bottom: 12px;
+	font-size: 20px;
+	color: #aaa;
+	font-weight: normal;
+}
+.user-wrapper p {
+	font-weight: bold;
+}
+
+.user-wrapper div {
+	margin-bottom: 22px;
+}
+
+input[type='text'],
+input[type='tel'],
+input[type='date'],
+input[type='email'] {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+}
+
+input[type='text']:focus,
+input[type='tel']:focus,
+input[type='date']:focus,
+input[type='email']:focus {
+	background-color: #ddd;
+	outline: none;
+}
+
+.register-btn {
+	background-color: #04aa6d;
+	color: white;
+	padding: 16px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+}
+.register-btn:hover {
+	opacity: 1;
+}
+
+a {
+	color: dodgerblue;
+}
+
+.switch-page {
+	background-color: #f1f1f1;
+	text-align: center;
+	padding: 22px;
+}
+
+.error {
+	color: red;
+}

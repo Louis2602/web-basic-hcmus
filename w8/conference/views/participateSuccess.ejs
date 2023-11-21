@@ -28,41 +28,18 @@
 		body {
 			background-color: #222529;
 		}
-		a {
-			text-decoration: none;
-			color: #fff;
-			list-style: none;
-		}
-		a:hover {
-			color: #fff;
-		}
 	</style>
 	<body>
 		<div class="container-fluid">
 			<%- include('navbar.ejs') %>
 			<div
+				id="successMessage"
 				class="container-fluid rounded-3 p-2 d-flex align-items-center justify-content-center"
-				style="background-color: #11262f; border: 1px solid #3d728a"
+				style="background-color: #0c1a12; border: 1px solid #284833"
 			>
-				<h3 style="color: #91d2e5">Welcome to ABC Conference!</h3>
-			</div>
-			<div
-				class="d-flex align-items-center justify-content-center gap-3 mt-4"
-			>
-				<a href="/confirmation">
-					<button
-						type="button"
-						class="btn btn-primary rounded-3"
-						id="confirmButton"
-					>
-						Confirm your attendance
-					</button>
-				</a>
-				<a href="/feedback">
-					<button type="button" class="btn btn-primary rounded-3">
-						View the attendee list
-					</button>
-				</a>
+				<h3 style="color: #7fb29a">
+					Thank you <%= name %>, for providing feedback
+				</h3>
 			</div>
 		</div>
 	</body>

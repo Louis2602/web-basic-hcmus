@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Gradient Background Color Generator</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div id="container">
+			<div class="title">
+				<h1>Background</h1>
+				<h1>Generator</h1>
+			</div>
+			<div class="color-box">
+				<input type="color" id="color1" value="#e9afc3" />
+				<input type="color" id="color2" value="#0794fe" />
+			</div>
+			<h3>Current CSS Background</h3>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$('#color1, #color2').on('input', function () {
+					var color1 = $('#color1').val();
+					var color2 = $('#color2').val();
+					$('#container').css(
+						'background',
+						'linear-gradient(to right, ' +
+							color1 +
+							', ' +
+							color2 +
+							')'
+					);
+				});
+			});
+		</script>
+	</body>
+</html>

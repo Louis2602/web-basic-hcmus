@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<link
+			rel="stylesheet"
+			href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+		/>
+		<title>User Registration and Login</title>
+	</head>
+	<body>
+		<div class="container">
+			<form method="post" class="register-form">
+				<div class="user-wrapper">
+					<h1 class="title">User Registration</h1>
+					<p class="desc">
+						Please fill in this form to create an account.
+					</p>
+					<div>
+						<p>Full Name</p>
+						<input
+							type="text"
+							name="fullname"
+							id="fullname"
+							placeholder="Enter fullname"
+							required
+						/>
+						<span class="error" id="fullname-error"></span>
+					</div>
+					<div>
+						<p>Username</p>
+						<input
+							type="text"
+							name="username"
+							id="username"
+							placeholder="Enter username"
+							required
+						/>
+						<span class="error" id="username-error"></span>
+					</div>
+					<div>
+						<p>Email</p>
+						<input
+							type="email"
+							name="email"
+							id="email"
+							placeholder="Enter email"
+							required
+						/>
+						<span class="error" id="email-error"></span>
+					</div>
+					<div>
+						<p>Phone number</p>
+						<input
+							type="tel"
+							name="phonenumber"
+							id="phonenumber"
+							placeholder="Enter phonenumber"
+							maxlength="10"
+							required
+						/>
+						<span class="error" id="phonenumber-error"></span>
+					</div>
+					<div>
+						<p>Date of birth</p>
+						<input
+							type="text"
+							name="dateofbirth"
+							id="dateofbirth"
+							placeholder="dd/mm/yyyy"
+							required
+						/>
+						<span class="error" id="dob-error"></span>
+					</div>
+					<button type="submit" class="register-btn">Register</button>
+				</div>
+				<div class="switch-page">
+					<p>
+						Already have an account?
+						<a href="signin.html">Sign in</a>.
+					</p>
+				</div>
+			</form>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+		<script src="validate.js"></script>
+		<script src="signup.js"></script>
+	</body>
+</html>

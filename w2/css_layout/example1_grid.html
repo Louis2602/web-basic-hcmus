@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS Layout Example 1 Using Grid</title>
+	</head>
+	<style>
+		* {
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+			text-transform: uppercase !important;
+			font-size: 1.2rem !important;
+		}
+
+		#header {
+			height: 60px;
+			background: #2196f3;
+			padding: 10px;
+		}
+
+		body {
+			display: grid;
+			grid-template-rows: auto 1fr auto;
+			min-height: 100vh;
+		}
+
+		#container {
+			display: grid;
+			grid-template-columns: 30% 70%;
+			grid-template-rows: auto;
+		}
+
+		.side {
+			background: #f2cb52;
+			padding: 10px;
+		}
+
+		.content {
+			background: #b7ce73;
+			padding: 10px;
+		}
+
+		#footer {
+			background: linear-gradient(#dba551, #ede0ae);
+			padding: 10px;
+		}
+
+		@media (max-width: 768px) {
+			#container {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+	<body>
+		<header id="header">Header</header>
+		<div id="container">
+			<div class="side">Side</div>
+			<div class="content">Content</div>
+		</div>
+		<footer id="footer">Footer</footer>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Sign In</title>
+	</head>
+	<body>
+		<div class="container">
+			<form class="signin-form" method="post">
+				<div class="user-wrapper">
+					<h1 class="title">Sign In</h1>
+					<p class="desc">Please fill in this form to sign in.</p>
+					<div>
+						<p>Username</p>
+						<input
+							type="text"
+							name="username"
+							id="username"
+							placeholder="Enter username"
+							required
+						/>
+						<span class="error" id="username-error"></span>
+					</div>
+					<div>
+						<p>Email</p>
+						<input
+							type="email"
+							name="email"
+							id="email"
+							placeholder="Enter email"
+							required
+						/>
+						<span class="error" id="email-error"></span>
+					</div>
+					<button type="submit" class="register-btn">Register</button>
+				</div>
+				<div class="switch-page">
+					<p>
+						Don't have an account?
+						<a href="signup.html">Sign up</a>.
+					</p>
+				</div>
+			</form>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script src="validate.js"></script>
+		<script src="signin.js"></script>
+	</body>
+</html>

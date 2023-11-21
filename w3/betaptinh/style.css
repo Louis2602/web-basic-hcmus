@@ -1,0 +1,73 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body,
+html {
+	width: 100%;
+	height: 100%;
+}
+
+button {
+	padding: 2px;
+}
+
+.container {
+	border: 2px solid #000;
+	display: inline-block;
+	padding: 5px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.content {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 20px;
+	margin-top: 32px;
+	margin-bottom: 12px;
+}
+
+.input {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+input[type='text'] {
+	padding: 3px;
+}
+.function {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.row-func {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 3px;
+}
+
+.noti-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 16px;
+}
+
+span {
+	color: red;
+}

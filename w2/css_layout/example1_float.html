@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS Layout Example 1 Using Float</title>
+	</head>
+	<style>
+		* {
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+			text-transform: uppercase !important;
+			font-size: 1.2rem !important;
+		}
+		#header {
+			height: 60px;
+			background: #2196f3;
+			padding: 10px;
+		}
+		body {
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+
+		#container {
+			display: flex;
+			flex: 1;
+		}
+		#container .side {
+			background: #f2cb52;
+			float: left;
+			width: 30%;
+			padding: 10px;
+		}
+		#container .content {
+			background: #b7ce73;
+			float: right;
+			width: 70%;
+			padding: 10px;
+		}
+		#footer {
+			background: linear-gradient(#dba551, #ede0ae);
+			padding: 10px;
+		}
+
+		@media (max-width: 768px) {
+			#container {
+				flex-flow: wrap;
+			}
+			#container .side,
+			#container .content {
+				float: none;
+				width: 100%;
+			}
+		}
+	</style>
+	<body>
+		<header id="header">Header</header>
+		<div id="container">
+			<div class="side">SIDE</div>
+			<div class="content">CONTENT</div>
+		</div>
+		<footer id="footer">Footer</footer>
+	</body>
+</html>

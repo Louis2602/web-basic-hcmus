@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Conference</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+			integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+	</head>
+	<style>
+		* {
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+		}
+		html,
+		body {
+			background-color: #222529;
+		}
+		.table thead tr {
+			border-bottom: 2px solid #333;
+		}
+		#feedbackBody td:nth-child(2) {
+			font-weight: bold;
+		}
+	</style>
+	<body>
+		<div class="container-fluid">
+			<nav class="navbar">
+				<div
+					class="container-fluid rounded-3 p-2"
+					style="background-color: #17223c; border: 1px solid #1b3476"
+				>
+					<a class="navbar-brand" href="/">
+						<i class="fa-solid fa-house text-light"></i>
+					</a>
+				</div>
+			</nav>
+			<div
+				id="feedbackTable"
+				class="container-fluid rounded-3 mt-3"
+				style="border: 1px solid #333"
+			>
+				<h3
+					class="text-light"
+					style="
+						background-color: #282b2f;
+						padding: 20px;
+						margin: 0 -12px;
+						border-bottom: 1px solid #333;
+					"
+				>
+					List of feedback
+				</h3>
+				<table class="table table-dark my-3">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Attendance</th>
+						</tr>
+					</thead>
+					<tbody id="feedbackBody">
+						<% if (data && data.length) { %> <%
+						data.forEach((participant, index) => { %>
+						<tr>
+							<td><%= index + 1 %></td>
+							<td><%= participant.name %></td>
+							<td><%= participant.email %></td>
+							<td><%= participant.phone %></td>
+							<td>
+								<%= participant.attendance ? 'Yes' : 'No' %>
+							</td>
+						</tr>
+						<% }); %> <% } else { %>
+						<tr>
+							<td colspan="4">No feedback available</td>
+						</tr>
+						<% } %>
+					</tbody>
+				</table>
+				<a
+					href="/"
+					class="text-light list-unstyled text-decoration-none"
+				>
+					<button
+						type="button"
+						class="btn btn-primary rounded-3 mb-3"
+					>
+						Go Home
+					</button>
+				</a>
+			</div>
+		</div>
+	</body>
+</html>

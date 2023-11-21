@@ -1,0 +1,54 @@
+#container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 2rem;
+}
+
+.square {
+	width: 70px;
+	height: 70px;
+	cursor: pointer;
+	position: relative;
+}
+
+#gameboard {
+	background-color: #000;
+	display: grid;
+	border-radius: 5px;
+	grid-template-columns: repeat(8, 1fr);
+	height: 560px;
+	width: 560px;
+	overflow: hidden;
+	user-select: none;
+}
+
+.green {
+	background-color: #769656;
+}
+
+.beige {
+	background-color: #eeeed2;
+}
+
+.piece {
+	position: relative;
+	z-index: 9;
+}
+
+.square img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	position: relative;
+	z-index: -9;
+}
+
+.valid-move {
+	background-color: #c8c868;
+}
+
+.error-move {
+	background-color: #d9b85b;
+}

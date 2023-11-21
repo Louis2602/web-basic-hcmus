@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Assignment 2</title>
+	</head>
+	<body>
+		<div class="container">
+			<h2>Bé tập tính</h2>
+			<div class="content">
+				<div class="input">
+					<div class="row">
+						<p>Số thứ nhất</p>
+						<input type="text" class="num1" />
+					</div>
+					<div class="row">
+						<p>Số thứ hai</p>
+						<input type="text" class="num2" />
+					</div>
+					<div class="row">
+						<p>Kết quả</p>
+						<input type="text" class="res" readonly />
+					</div>
+				</div>
+				<div class="function">
+					<div class="row-func">
+						<input
+							type="radio"
+							class="add"
+							checked
+							name="operation"
+							value="'add"
+						/>
+						<p>Cộng</p>
+					</div>
+					<div class="row-func">
+						<input
+							type="radio"
+							class="subtract"
+							name="operation"
+							value="'subtract"
+						/>
+						<p>Trừ</p>
+					</div>
+					<div class="row-func">
+						<input
+							type="radio"
+							class="multiply"
+							name="operation"
+							value="multiply"
+						/>
+						<p>Nhân</p>
+					</div>
+					<div class="row-func">
+						<input
+							type="radio"
+							class="divide"
+							name="operation"
+							value="divide"
+						/>
+						<p>Chia</p>
+					</div>
+					<button onclick="calculation()">Tính</button>
+				</div>
+			</div>
+			<div class="noti-container">
+				<p>Thông báo</p>
+				<span></span>
+			</div>
+		</div>
+	</body>
+	<script src="main.js"></script>
+</html>

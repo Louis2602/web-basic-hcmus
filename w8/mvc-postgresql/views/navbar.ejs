@@ -1,0 +1,44 @@
+<nav class="navbar navbar-light mt-2" style="background-color: aliceblue">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/">
+			<i class="fa-solid fa-house"></i>
+		</a>
+		<form class="d-flex" id="searchForm">
+			<input
+				class="form-control me-2"
+				type="search"
+				placeholder="Search"
+				aria-label="Search"
+				id="searchInput"
+			/>
+			<button class="btn btn-outline-success" type="submit">
+				Search
+			</button>
+		</form>
+	</div>
+</nav>
+
+<script>
+	document
+		.getElementById('searchForm')
+		.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const searchQuery = document.getElementById('searchInput').value;
+
+			fetch(`/search-users?query=${searchQuery}`)
+				.then(async (response) => {
+					if (response.ok) {
+						window.location.href =
+							'/search-users?query=' + searchQuery;
+					} else {
+						throw new Error('Network response was not ok');
+					}
+				})
+				.catch((error) => {
+					console.error(
+						'There was a problem with the request:',
+						error
+					);
+				});
+		});
+</script>

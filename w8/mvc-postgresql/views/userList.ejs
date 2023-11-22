@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Conference</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+			integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+	</head>
+	<style>
+		* {
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+		}
+		.table thead tr {
+			border-bottom: 2px solid #333;
+		}
+		.table tbody tr:hover {
+			cursor: pointer;
+		}
+	</style>
+	<body>
+		<div class="container-fluid">
+			<%- include('navbar.ejs') %>
+
+			<table class="table table-striped my-3 table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Avatar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if (users && users.length) { %> <% users.forEach((user,
+					index) => { %>
+					<tr onclick="showUserInfo('<%= user.id%>')">
+						<td><%= user.id %></td>
+						<td><%= user.first_name %></td>
+						<td><%= user.last_name %></td>
+						<td><%= user.email %></td>
+						<td>
+							<img
+								src="<%= user.avatar %>"
+								alt="Avatar"
+								style="
+									object-fit: cover;
+									width: 100px;
+									height: 100px;
+								"
+							/>
+						</td>
+					</tr>
+					<% }); %> <% } else { %>
+					<tr>
+						<td colspan="5">No users</td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+			<nav>
+				<ul class="pagination justify-content-end">
+					<% for (let i = 1; i <= totalPages; i++) { %>
+					<li
+						class="page-item <%= i === currentPage ? 'active' : '' %>"
+					>
+						<a class="page-link" href="/users?page=<%= i %>"
+							><%= i %></a
+						>
+					</li>
+					<% } %>
+				</ul>
+			</nav>
+		</div>
+		<script>
+			const showUserInfo = (userId) => {
+				window.location.href = `/users/${userId}`;
+			};
+		</script>
+	</body>
+</html>

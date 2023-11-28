@@ -29,9 +29,15 @@
 			</ul>
 			<div class='d-flex'>
 				<button class='btn btn-dark ms-3'>
-					<a href='/auth/signin'>
-						Sign in
-					</a>
+					{{#if isLogged}}
+						<a href='/auth/signout'>
+							Logout
+						</a>
+					{{else}}
+						<a href='/auth/signin'>
+							Sign in
+						</a>
+					{{/if}}
 				</button>
 				<button class='btn btn-dark ms-3'>
 					<a href='/auth/signup'>

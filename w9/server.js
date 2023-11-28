@@ -35,12 +35,12 @@ app.set('views', './views');
 app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
-	console.log(!req.session.user);
 	if (!req.session.user) {
 		return res.redirect('/auth/signin');
 	}
 	res.render('home', {
 		title: 'Home',
+		isLogged: req.session.user ? true : false,
 	});
 });
 

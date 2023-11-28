@@ -58,6 +58,14 @@ const userController = {
 			next(err);
 		}
 	},
+	signOut: async (req, res, next) => {
+		try {
+			req.session.user = null;
+			res.redirect('/auth/signin');
+		} catch (err) {
+			next(err);
+		}
+	},
 };
 
 module.exports = userController;

@@ -1,0 +1,25 @@
+<div class='container my-3'>
+	<h2>Products under {{catName}}</h2>
+	<table class='table table-striped'>
+		<thead>
+			<tr>
+				<th scope='col'>Product Name</th>
+				<th scope='col'>Description</th>
+				<th scope='col'>Price</th>
+				<th scope='col'>Quantity</th>
+				<!-- Add other columns for additional product details -->
+			</tr>
+		</thead>
+		<tbody>
+			{{#each products}}
+				<tr>
+					<td>{{this.ProName}}</td>
+					<td>{{this.TinyDes}}</td>
+					<td>{{this.Price}}</td>
+					<td>{{this.Quantity}}</td>
+					<!-- Add additional columns based on your product properties -->
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>

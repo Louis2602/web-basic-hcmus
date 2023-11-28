@@ -45,7 +45,9 @@ app.get('/', (req, res) => {
 });
 
 const userRoutes = require('./routers/user.route');
+const categoriesRoutes = require('./routers/categories.route');
 app.use('/auth', userRoutes);
+app.use('/categories', categoriesRoutes);
 
 // Handling invalid routes
 app.use((req, res, next) => {

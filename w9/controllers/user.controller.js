@@ -61,7 +61,12 @@ const userController = {
 	signOut: async (req, res, next) => {
 		try {
 			req.session.user = null;
-			res.redirect('/auth/signin');
+			req.session.destroy((err) => {
+				if (err) {
+					return next(err);
+				}
+				res.redirect('/auth/signin');
+			});
 		} catch (err) {
 			next(err);
 		}

@@ -1,0 +1,27 @@
+<div class='container my-3'>
+	<h2>Categories</h2>
+	<table class='table table-striped'>
+		<thead>
+			<tr>
+				<th scope='col'>Category Name</th>
+				<th scope='col'>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each categories}}
+				<tr>
+					<td>{{this.CatName}}</td>
+					<td>
+						<a
+							href='/categories/{{this.CatID}}/products'
+							class='btn btn-primary'
+						>View Products</a>
+						<!-- Add delete and edit links as buttons -->
+						<button class='btn btn-danger'>Delete</button>
+						<button class='btn btn-secondary'>Edit</button>
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>

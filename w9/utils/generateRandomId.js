@@ -1,6 +1,6 @@
 function randomId() {
-	const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
-	return uint32;
+	const crypto = require('crypto');
+	return crypto.randomBytes(1).readUInt8(0);
 }
 
 module.exports = { randomId };

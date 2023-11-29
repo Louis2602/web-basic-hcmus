@@ -40,7 +40,8 @@ const userController = {
 		try {
 			const { username, password } = req.body;
 			const foundUser = await UserModel.getUser(username);
-			if (!foundUser) return;
+			if (!foundUser)
+				return next(new Error('Wrong username or password'));
 			bcrypt.compare(
 				password,
 				foundUser.Password,

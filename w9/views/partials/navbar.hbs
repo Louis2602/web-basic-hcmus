@@ -15,21 +15,27 @@
 		<div class='d-flex align-items-center justify-content-between'>
 			<div class='d-flex'>
 				{{#if isLogged}}
-					<a href='/auth/signout'>
-						<button class='btn btn-dark ms-3'>
-							Logout
-						</button>
+					<a
+						href='/auth/signout'
+						class='btn btn-dark ms-3'
+						type='button'
+					>
+						Logout
 					</a>
 				{{else}}
-					<a href='/auth/signin'>
-						<button class='btn btn-dark ms-3'>
-							Sign in
-						</button>
+					<a
+						href='/auth/signin'
+						class='btn btn-dark ms-3'
+						type='button'
+					>
+						Sign in
 					</a>
-					<a href='/auth/signup'>
-						<button class='btn btn-dark ms-3'>
-							Sign up
-						</button>
+					<a
+						href='/auth/signup'
+						class='btn btn-dark ms-3'
+						type='button'
+					>
+						Sign up
 					</a>
 				{{/if}}
 			</div>

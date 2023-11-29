@@ -16,8 +16,12 @@ const localhost = process.env.HOST;
 const hbs = create({ extname: '.hbs' });
 const SECRET_KEY = process.env.SECRET_KEY;
 
+app.use('/imgs', express.static('imgs'));
+app.use('/views', express.static('views'));
+
 app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser(SECRET_KEY));
 app.use(
 	session({
@@ -33,6 +37,11 @@ app.use(
 app.engine('hbs', hbs.engine);
 app.set('views', './views');
 app.set('view engine', 'hbs');
+
+app.use((req, res, next) => {
+	res.locals.isLogged = req.session.user ? true : false;
+	next();
+});
 
 app.get('/', (req, res) => {
 	if (!req.session.user) {

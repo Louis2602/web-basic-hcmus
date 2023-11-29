@@ -1,25 +1,40 @@
-<div class='container my-3'>
-	<h2>Products under {{catName}}</h2>
-	<table class='table table-striped'>
-		<thead>
-			<tr>
-				<th scope='col'>Product Name</th>
-				<th scope='col'>Description</th>
-				<th scope='col'>Price</th>
-				<th scope='col'>Quantity</th>
-				<!-- Add other columns for additional product details -->
-			</tr>
-		</thead>
-		<tbody>
-			{{#each products}}
-				<tr>
-					<td>{{this.ProName}}</td>
-					<td>{{this.TinyDes}}</td>
-					<td>{{this.Price}}</td>
-					<td>{{this.Quantity}}</td>
-					<!-- Add additional columns based on your product properties -->
-				</tr>
-			{{/each}}
-		</tbody>
-	</table>
+<div class="container my-3">
+  <h2>
+    Products under {{catName}}
+  </h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {{#each products}}
+      <div class="col">
+        <div class="card h-100">
+          <img
+            src="/imgs/{{this.ProID}}/main_thumbs.jpg"
+            class="card-img-top"
+            alt="Product Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">
+              {{this.ProName}}
+            </h5>
+            <p class="card-text">
+              {{this.TinyDes}}
+            </p>
+            <p class="card-text">
+              Price: {{this.Price}}
+            </p>
+            <p class="card-text">
+              Quantity: {{this.Quantity}}
+            </p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <button type="button" class="btn btn-primary mt-3" onclick="goBack()">
+    Back to categories
+  </button>
 </div>
+<script>
+  function goBack() {
+        window.history.back();
+    }
+</script>

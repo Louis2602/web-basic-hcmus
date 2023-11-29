@@ -27,6 +27,38 @@ const categoriesController = {
 			next(err);
 		}
 	},
+	deleteCategory: async (req, res, next) => {
+		try {
+			const catId = req.params.catId;
+			await CategoriesModel.deleteCategoryById(catId);
+			res.status(200).json({ message: 'Delete category successfully' });
+		} catch (err) {
+			next(err);
+		}
+	},
+	addNewCategory: async (req, res, next) => {
+		try {
+			const { CatName } = req.body;
+			await CategoriesModel.addNewCategory(CatName);
+			res.status(200).json({ message: 'Add new category successfully' });
+		} catch (err) {
+			next(err);
+		}
+	},
+	editCategory: async (req, res, next) => {
+		try {
+			const catId = req.params.catId;
+			console.log(
+				'🚀 ~ file: categories.controller.js:51 ~ editCategory: ~ catId:',
+				catId
+			);
+			const { CatName } = req.body;
+			await CategoriesModel.editCategory(catId, CatName);
+			res.status(200).json({ message: 'Edit category successfully' });
+		} catch (err) {
+			next(err);
+		}
+	},
 };
 
 module.exports = categoriesController;

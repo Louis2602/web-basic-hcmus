@@ -1,0 +1,39 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+a,
+a:hover {
+	text-decoration: none;
+	list-style: none;
+	color: inherit;
+}
+.card {
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.card-text {
+	color: #555;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
+}

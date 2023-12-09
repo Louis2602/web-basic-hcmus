@@ -34,12 +34,14 @@ app.use(
 	})
 );
 
+require('./modules/passport')(app);
+
 app.engine('hbs', hbs.engine);
 app.set('views', './views');
 app.set('view engine', 'hbs');
 
 app.use((req, res, next) => {
-	res.locals.isLogged = req.session.user ? true : false;
+	res.locals.isLogged = req.session?.passport?.user ? true : false;
 	next();
 });
 

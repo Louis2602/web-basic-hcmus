@@ -1,40 +1,131 @@
 <div class="container my-3">
-  <h2>
-    Products under {{catName}}
-  </h2>
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h2>
+      Products under {{catName}}
+    </h2>
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">Add
+      new product</button>
+  </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {{#each products}}
-      <div class="col">
-        <div class="card h-100">
-          <img
-            src="/imgs/{{this.ProID}}/main_thumbs.jpg"
-            class="card-img-top"
-            alt="Product Image"
-          />
-          <div class="card-body">
-            <h5 class="card-title">
-              {{this.ProName}}
-            </h5>
-            <p class="card-text">
-              {{this.TinyDes}}
-            </p>
-            <p class="card-text">
-              Price: {{this.Price}}
-            </p>
-            <p class="card-text">
-              Quantity: {{this.Quantity}}
-            </p>
+    <div class="col">
+      <div class="card h-100">
+        <div class="d-flex align-items-center gap-3 justify-content-end m-3">
+          <i class="fa-solid fa-trash text-danger" style="cursor: pointer; font-size: 20px;"></i>
+          <i class="fa-solid fa-edit text-success" style="cursor: pointer; font-size: 20px;" data-bs-toggle="modal"
+            data-bs-target="#editProductModal"></i>
+        </div>
+        <img src="/imgs/{{this.ProID}}/main_thumbs.jpg" class="card-img-top" alt="Product Image" />
+        <div class="card-body">
+          <h5 class="card-title">
+            {{this.ProName}}
+          </h5>
+          <p class="card-text">
+            {{this.TinyDes}}
+          </p>
+          <p class="card-text">
+            Price: {{this.Price}}
+          </p>
+          <p class="card-text">
+            Quantity: {{this.Quantity}}
+          </p>
+        </div>
+      </div>
+    </div>
+    {{!-- EDIT PRODUCT --}}
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProductModalLabel">Edit product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/categories/products/{{this.ProID}}/edit" method="POST">
+              <div class="mb-3">
+                <label for="name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{this.ProName}}">
+              </div>
+              <div class="mb-3">
+                <label for="desc" class="col-form-label">Description:</label>
+                <input class="form-control" id="desc" name="desc" value="{{this.TinyDes}}"></input>
+              </div>
+              <div class="mb-3">
+                <label for="price" class="col-form-label">Price:</label>
+                <input type="number" class="form-control" id="price" name="price" value="{{this.Price}}"></input>
+              </div>
+              <div class="mb-3">
+                <label for="quantity" class="col-form-label">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" name="quantity"
+                  value="{{this.Quantity}}"></input>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
     {{/each}}
   </div>
-  <button type="button" class="btn btn-primary mt-3" onclick="goBack()">
+  <a type="button" class="btn btn-primary mt-3" href="/categories">
     Back to categories
-  </button>
+  </a>
+  <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addProductModalLabel">Add new product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/categories/{{catId}}/products/add" enctype="multipart/form-data" method="POST">
+            <div class="mb-3">
+              <label for="name" class="col-form-label">Name:</label>
+              <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+              <label for="desc" class="col-form-label">Description:</label>
+              <input class="form-control" id="desc" name="desc"></input>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="col-form-label">Price:</label>
+              <input type="number" class="form-control" id="price" name="price"></input>
+            </div>
+            <div class="mb-3">
+              <label for="quantity" class="col-form-label">Quantity:</label>
+              <input type="number" class="form-control" id="quantity" name="quantity"></input>
+            </div>
+            <div class="mb-3">
+              <label for="Thumbnail" class="col-form-label">Thumbnail:</label>
+              <input type="file" accept="image/*" id="thumbnail" name="thumbnail" />
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
-  function goBack() {
-        window.history.back();
-    }
+  function deleteProduct(proId) {
+    const catId = "{{catId}}";
+
+    fetch(`/categories/${catId}/products/${proId}`, {
+      method: 'DELETE'
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (data.ok) {
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 </script>

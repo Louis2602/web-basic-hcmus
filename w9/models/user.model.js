@@ -2,7 +2,7 @@ const db = require('../db');
 const { randomId } = require('../utils/generateRandomId');
 
 const UserModel = {
-	addUser: async (username, password, fullname, email, dob) => {
+	addUser: async (username, password, email, fullname, dob) => {
 		try {
 			const userId = randomId();
 			await db.none(

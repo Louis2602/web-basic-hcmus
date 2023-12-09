@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt');
 const userController = {
 	getSignInPage: async (req, res, next) => {
 		try {
+			if (req.isAuthenticated()) {
+				res.redirect('/categories');
+			}
 			res.render('signin', {
 				title: 'Sign In',
 			});
@@ -27,9 +30,8 @@ const userController = {
 				if (err) {
 					return next(err);
 				}
-
 				await UserModel.addUser(username, hash, email, fullname, dob);
-				res.redirect('/');
+				res.redirect('/auth/signin');
 			});
 		} catch (err) {
 			next(err);

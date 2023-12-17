@@ -4,9 +4,6 @@ const userController = require('../controllers/user.controller');
 const passport = require('passport');
 
 router.get('/signin', userController.getSignInPage);
-router.get('/signup', userController.getSignUpPage);
-router.post('/signup', userController.signUp);
-router.get('/signout', userController.signOut);
 router.post(
 	'/signin',
 	passport.authenticate('myStrategy', {
@@ -22,5 +19,8 @@ router.use((req, res, next) => {
 	}
 	res.redirect('/auth/signin');
 });
+router.get('/signup', userController.getSignUpPage);
+router.post('/signup', userController.signUp);
+router.get('/signout', userController.signOut);
 
 module.exports = router;

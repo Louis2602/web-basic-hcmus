@@ -1,0 +1,199 @@
+<div class="container my-3">
+  <h2>
+    Categories
+  </h2>
+  <button
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#addEditCategoryModal"
+    onclick="openAddEditModal('add')"
+  >
+    Add new category
+  </button>
+  {{! Modal }}
+  <!-- Add/Edit Category Modal -->
+  <div
+    class="modal fade"
+    id="addEditCategoryModal"
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Add new category
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Category's name"
+            aria-label="Category's name"
+            id="newCategoryInput"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="handleAddEditCategory()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">
+          Category Name
+        </th>
+        <th scope="col">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each categories}}
+        <tr>
+          <td>
+            {{this.CatName}}
+          </td>
+          <td>
+            <a
+              href="/categories/{{this.CatID}}/products"
+              class="btn btn-primary"
+            >
+              View Products
+            </a>
+            <button
+              class="btn btn-danger"
+              onclick="deleteCategory({{this.CatID}})"
+            >
+              Delete
+            </button>
+            <a
+              class="btn btn-secondary"
+              onclick="openAddEditModal('edit', '{{this.CatID}}')"
+            >
+              Edit
+            </a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+<script>
+  function deleteCategory(categoryID) {
+		fetch(`/categories/${categoryID}`, {
+			method: 'DELETE', 
+      headers: { 'Content-Type': 'application/json' }
+		}).then(async response => {
+      if (response.ok) {
+        const data = await response.json();
+				alert(data.message);
+				window.location.reload();
+			} else { alert('Failed to delete category'); }
+		}).catch(error => { console.log(error) });
+	}
+	
+  function openAddEditModal(action, catID = null) {
+        const modal = document.getElementById('addEditCategoryModal');
+        const modalTitle = document.querySelector('#addEditCategoryModal .modal-title');
+        const modalInput = document.getElementById('newCategoryInput');
+        const modalButton = document.querySelector('#addEditCategoryModal .btn-primary');
+
+        modalInput.value = '';
+
+        if (action === 'edit') {
+            modalTitle.textContent = 'Edit category';
+            modalButton.textContent = 'Save';
+
+            fetch(`/categories/${catID}`)
+                .then(response => response.json())
+                .then(data => {
+                    modalInput.value = data.CatName;
+                })
+                .catch(error => console.error('Error fetching category:', error));
+        } else {
+            modalTitle.textContent = 'Add new category';
+            modalButton.textContent = 'Add';
+        }
+
+        modalButton.onclick = () => {
+            const categoryName = modalInput.value.trim();
+            if (!categoryName) {
+                alert('Please enter a category name');
+                return;
+            }
+
+            if (action === 'edit') {
+                fetch(`/categories/${catID}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ CatName: categoryName })
+                })
+                .then(async response => {
+                    const data = await response.json();
+                    if (response.ok) {
+                        alert(data.message);
+                        window.location.reload();
+                    } else {
+                        alert('Failed to edit category');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error editing category:', error);
+                    alert('An error occurred while editing the category');
+                });
+            } else {
+                fetch('/categories', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ CatName: categoryName })
+                })
+                .then(async response => {
+                    const data = await response.json();
+                    if (response.ok) {
+                        alert(data.message);
+                        window.location.reload();
+                    } else {
+                        alert('Failed to add category');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error adding category:', error);
+                    alert('An error occurred while adding the category');
+                });
+            }
+        };
+
+        const modalInstance = new bootstrap.Modal(modal);
+        modal.addEventListener('hidden.bs.modal', function (event) {
+            const modalBackdrop = document.querySelector('.modal-backdrop');
+            if (modalBackdrop) {
+                modalBackdrop.parentNode.removeChild(modalBackdrop);
+            }
+        });
+        modalInstance.show();
+    }
+</script>

@@ -30,7 +30,6 @@ app.use(
 		saveUninitialized: true,
 		cookie: {
 			secure: false,
-			maxAge: 180 * 60 * 1000,
 		},
 	})
 );
@@ -43,7 +42,6 @@ app.set('view engine', 'hbs');
 
 app.use((req, res, next) => {
 	res.locals.isLogged = req.session?.passport?.user ? true : false;
-	res.locals.session = req.session;
 	next();
 });
 
@@ -59,11 +57,8 @@ app.get('/', (req, res) => {
 
 const userRoutes = require('./routers/user.route');
 const categoriesRoutes = require('./routers/categories.route');
-const messageRoutes = require('./routers/message.route');
-
 app.use('/auth', userRoutes);
 app.use('/categories', categoriesRoutes);
-app.use('/message', messageRoutes);
 
 // Handling invalid routes
 app.use((req, res, next) => {

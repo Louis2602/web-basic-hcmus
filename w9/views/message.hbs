@@ -1,0 +1,35 @@
+<style>
+    #messageList {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+</style>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body" id="messages">
+            {{!-- Messages go here --}}
+        </div>
+        <div class="card-footer d-flex gap-3">
+            <input type="text" id="messageInput" class="form-control" placeholder="Type your message">
+            <button class="btn btn-primary"
+                onclick="message(document.getElementById('messageInput').value)">Send</button>
+        </div>
+    </div>
+</div>
+<script>
+    function poll() {
+        fetch("/message/poll")
+            .then((res) => res.text())
+            .then((message) => (document.getElementById("messages").innerHTML += `${message} <br>`))
+            .finally(() => poll());
+    }
+
+    function message(message) {
+        document.getElementById("messageInput").value = "";
+        fetch("/message", {
+            method: "POST",
+            body: message,
+        });
+    }
+    poll();
+</script>

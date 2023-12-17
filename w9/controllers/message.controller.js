@@ -7,11 +7,20 @@ function emitMessage(message) {
 const messageController = {
 	getMessagePage: async (req, res, next) => {
 		try {
-			res.render('message', {
-				title: 'Message Feature',
+			res.render('message-poll', {
+				title: 'Message Poll Feature',
 			});
 		} catch (error) {
 			next(err);
+		}
+	},
+	getSocketPage: async (req, res, next) => {
+		try {
+			res.render('message-socket', {
+				title: 'Message Poll Feature',
+			});
+		} catch (error) {
+			next(error);
 		}
 	},
 	getMessage: (req, res) => {

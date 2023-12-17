@@ -2,9 +2,12 @@
 	<div class='container'>
 		<a class='navbar-brand' href='/'>Categories Management</a>
 		<div class='d-flex align-items-center justify-content-between'>
-			<a href='/message' class="btn btn-success" type="button">Message</a>
 			<div class='d-flex'>
 				{{#if isLogged}}
+				<div class="d-flex gap-2">
+					<a href='/message/message-poll' class="btn btn-success" type="button">Message Using Poll</a>
+					<a href='/message/message-socket' class="btn btn-success" type="button">Message Using Socket.io</a>
+				</div>
 				<a href='/auth/signout' class='btn btn-dark ms-3' type='button'>
 					Logout
 				</a>

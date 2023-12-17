@@ -18,6 +18,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 app.use('/pid', express.static('pid'));
 app.use('/views', express.static('views'));
+app.use(express.static('public'));
 
 app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -83,7 +84,34 @@ app.use((err, req, res, next) => {
 		description: err.message,
 	});
 });
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
-app.listen(port, () => {
-	console.log(`Server is running on: http://${localhost}:${port}`);
+let socketsConnected = new Set();
+
+io.on('connection', onConnected);
+
+server.listen(port, () => {
+	console.log(`HTTP Server is running on: http://${localhost}:${port}`);
 });
+
+function onConnected(socket) {
+	console.log(socket.id);
+	socketsConnected.add(socket.id);
+
+	io.emit('clients-total', socketsConnected.size);
+
+	socket.on('disconnect', () => {
+		console.log('Socket disconnected', socket.id);
+		socketsConnected.delete(socket.id);
+		io.emit('clients-total', socketsConnected.size);
+	});
+
+	socket.on('message', (data) => {
+		socket.broadcast.emit('chat-message', data);
+	});
+
+	socket.on('feedback', (data) => {
+		socket.broadcast.emit('feedback', data);
+	});
+}

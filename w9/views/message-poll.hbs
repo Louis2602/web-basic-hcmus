@@ -1,0 +1,60 @@
+<style>
+    #messageList {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+</style>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body" id="messages">
+            <!-- Messages go here -->
+        </div>
+        <div class="card-footer d-flex gap-3">
+            <input type="text" id="messageInput" class="form-control" placeholder="Type your message">
+            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>
+<script>
+    let lastMessageCount = 0;
+
+    function poll() {
+        fetch("/message/poll")
+            .then((res) => res.text())
+            .then((message) => {
+                document.getElementById("messages").innerHTML += `${message} <br>`;
+                if (lastMessageCount > 0) {
+                    // New message arrived, show notification
+                    showNotification("New message received!");
+                }
+                lastMessageCount++;
+            })
+            .finally(() => poll());
+    }
+
+    function sendMessage() {
+        const message = document.getElementById("messageInput").value;
+        document.getElementById("messageInput").value = "";
+        fetch("/message", {
+            method: "POST",
+            body: message,
+        });
+    }
+
+    function showNotification(message) {
+        // Check if the browser supports notifications
+        if ("Notification" in window) {
+            // Request permission for the notification
+            Notification.requestPermission().then(function (permission) {
+                // If the user allows, show the notification
+                if (permission === "granted") {
+                    new Notification("New Message", {
+                        body: message,
+                    });
+                }
+            });
+        }
+    }
+
+    poll();
+</script>
